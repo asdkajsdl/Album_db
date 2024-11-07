@@ -5,8 +5,7 @@
   color: #ffffff;
   font-size: 55px;
   padding: 50px;
-  background-color: rgb(43, 42, 42);
-  border-radius: 30px;
+  background-color: rgb(31, 31, 31);
 }
 
 body {
@@ -127,4 +126,19 @@ body {
   font-weight: bold;
   text-decoration: none;
   margin-top: 80px;
+}
+
+.links{
+  padding: 15px;
+  background-color: #0c0c0c;
+  text-align: center;
+  gap: 15px;
+  font-weight: bold;
+  gap: 88px;
+}
+
+.Texto-links{
+  color: white;
+  margin: 50px;
+  text-decoration: none;
 }

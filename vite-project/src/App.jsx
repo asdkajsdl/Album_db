@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./App.css";
+import integrantes from './integrantes';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -9,6 +10,15 @@ function App() {
       <header>
         <h1 className="Texto1">Alan Sutton Y Las Criaturitas De La Anciedad</h1>
         </header>
+        <div className="links">
+            <div>
+            <a className="Texto-links" href="https://open.spotify.com/intl-es/artist/3OFrGQrdXwm0UgTERW6LAV">Spotify</a>
+            <a className="Texto-links" href="https://www.youtube.com/@alansuttonylascriaturitas">Youtube</a>
+            <a className="Texto-links" href="https://www.tiktok.com/@alansuttonylascriaturita?lang=en">Tiktok</a>
+            <a className="Texto-links" href="https://www.instagram.com/alansuttonylascriaturitas/">Instagram</a>
+            <a className="Texto-links" href="/integrantes.jsx">Integrantes</a>
+            </div>         
+        </div>
       <h1 className="Textocolor">Albumnes:</h1>
       <div>
         <div className="centrar">
@@ -122,6 +132,14 @@ function App() {
              <div className="informacion">
              <h3 className="text-informacion">Alan Sutton y las criaturitas de la ansiedad es una banda de Buenos Aires, Argentina que surge del encuentro entre Jerónimo Romero y Alan Sutton. Ya sea desde una dura crítica social, un existencialismo desgarrador, o un optimismo exultante, escuchar a "Las Criaturitas" es siempre un viaje distinto. Cada canción tiene su propia búsqueda, su propia identidad, y su propio universo sonoro. Resultado de la unión entre cantautor y productor, la banda no busca definirse en un género, sino más bien ampliar sus propios horizontes; el cambio y la transformación como motor en un mundo repleto de estímulos y ansiedad. Alan era un músico callejero que había comenzado a escribir sus primeras canciones y buscaba grabarlas de alguna manera. Su intención no era hacer un disco, ni formar una banda, sino más bien tener un registro de sus escritos. Por una de esas vueltas de la vida, Alan conoce a Jero, un joven apasionado de la producción musical, quien le dice las palabras que cambiarían su vida: "tus canciones son increíbles, grabemos un disco y hagamos una banda". Fue ese entusiasmo, esa mutua intensidad y esa química lo que, aunque no lo supieran, empezaba a darle forma a un universo de juego y creación, al que nunca podrían haber accedido sin el otro. En 2023 lanzaron su 3er álbum ALGO TIENE QUE CAMBIAR Fotos por Diego Homez</h3>
              </div>
+        </div>
+        <div className="links">
+            <div>
+            <a className="Texto-links" href="https://open.spotify.com/intl-es/artist/3OFrGQrdXwm0UgTERW6LAV">Spotify</a>
+            <a className="Texto-links" href="https://www.youtube.com/@alansuttonylascriaturitas">Youtube</a>
+            <a className="Texto-links" href="https://www.tiktok.com/@alansuttonylascriaturita?lang=en">Tiktok</a>
+            <a className="Texto-links" href="https://www.instagram.com/alansuttonylascriaturitas/">Instagram</a>
+            </div>         
         </div>
       </div>
     </>
