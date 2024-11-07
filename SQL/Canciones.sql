@@ -1,17 +1,42 @@
 CREATE TABLE Canciones (
     song_id INT AUTO_INCREMENT PRIMARY KEY,  -- Identificador único de la canción (Clave primaria)
-    album_id INT,                            -- Identificador del álbum (Clave foránea)
-    title VARCHAR(100) NOT NULL,              -- Título de la canción
+    Album_id INT,                            -- Identificador del álbum (Clave foránea)
+    Titulo VARCHAR(100) NOT NULL,              -- Título de la canción
     duration TIME,                           -- Duración de la canción (HH:MM:SS)
-    track_number INT,                        -- Número de pista en el álbum
-    release_date DATETIME,                   -- Fecha de lanzamiento de la canción
     FOREIGN KEY (album_id) REFERENCES Álbumes(album_id)  -- Relación con la tabla Álbumes
 );
 
 
-INSERT INTO Canciones (album_id, title, duration, track_number, release_date)
-VALUES 
-(1, 'El Último Sueño', '04:05', 1, '2022-05-15 00:00:00'),
-(1, 'El Viento y el Fuego', '03:45', 2, '2022-05-15 00:00:00'),
-(2, 'La Noche del Desvelo', '05:10', 1, '2023-06-20 00:00:00'),
-(2, 'Despertar de las Sombras', '04:30', 2, '2023-06-20 00:00:00');
+INSERT INTO Canciones (Album_id,Titulo, Duracion,Año_lanzamiento)
+VALUES ('Tuntakmon'),
+('Omatopopih'),
+('Hijo prodigo'),
+('Vamo a bailar a tribunales'),
+('Mas sencillo'),
+('Dejando de fumar'),
+('La mochila del mundo'),
+('Sigo intentando'),
+('Astronautas'),
+('Anita'),
+('Casi 30'),
+('No tengo hambre tengo ansiedad'),
+('Cultura porno disney'),
+('El moutros del sofa'),
+('Dopamina'),
+('Algo nuevo'),
+('La era del Rivotril'),
+('Un dia a la vez + 135'),
+('Las vacas'),
+('Vertigo'),
+('Entre los dedos se va'),
+('No es cualquier bebida'),
+('Bonsai'),
+('Nicolas cage'),
+('El mundo siempre estuvo'),
+('Algo tiene que cambiar'),
+('El Heroe de constitucion'),
+('Paris es buen lugar para'),
+('Fin del mundo'),
+('Principio a fin'),
+('Cancion de julia'),
+('El juglar');
