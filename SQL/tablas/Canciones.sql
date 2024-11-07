@@ -7,3 +7,39 @@ CREATE TABLE Canciones (
     fecha_lanzamiento DATE,
     FOREIGN KEY (id_album) REFERENCES Albumes(id_album)
 );
+
+
+INSERT INTO Canciones (Album_id,Titulo, Duracion,Año_lanzamiento)
+VALUES ('Tuntakmon'),
+('Omatopopih'),
+('Hijo prodigo'),
+('Vamo a bailar a tribunales'),
+('Mas sencillo'),
+('Dejando de fumar'),
+('La mochila del mundo'),
+('Sigo intentando'),
+('Astronautas'),
+('Anita'),
+('Casi 30'),
+('No tengo hambre tengo ansiedad'),
+('Cultura porno disney'),
+('El moutros del sofa'),
+('Dopamina'),
+('Algo nuevo'),
+('La era del Rivotril'),
+('Un dia a la vez + 135'),
+('Las vacas'),
+('Vertigo'),
+('Entre los dedos se va'),
+('No es cualquier bebida'),
+('Bonsai'),
+('Nicolas cage'),
+('El mundo siempre estuvo'),
+('Algo tiene que cambiar'),
+('El Heroe de constitucion'),
+('Paris es buen lugar para'),
+('Fin del mundo'),
+('Principio a fin'),
+('Cancion de julia'),
+('El juglar');
+
