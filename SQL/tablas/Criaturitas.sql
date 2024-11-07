@@ -14,3 +14,4 @@ VALUES
 (1, 'Lautaro Rodriguez Alvares', 'Teclado'),
 (1, 'Jeronimo Romero', 'Guitarra'),
 (1, 'Agustin Ruiz Panelo', 'Percucion');
+

@@ -7,6 +7,3 @@ CREATE TABLE Canciones (
     fecha_lanzamiento DATE,
     FOREIGN KEY (id_album) REFERENCES Albumes(id_album)
 );
-
-
-
