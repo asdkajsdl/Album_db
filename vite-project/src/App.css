@@ -1,14 +1,13 @@
 .Texto1 {
   text-align: center;
-  text-decoration: solid;
+  text-decoration: none; 
   font-weight: bold;
-  text-decoration: rgb(255, 255, 255);
   color: #ffffff;
   font-size: 55px;
   padding: 50px;
+  background-color: rgb(43, 42, 42);
+  border-radius: 30px;
 }
-
-
 
 body {
   background-color: rgb(0, 0, 0);
@@ -19,34 +18,113 @@ body {
   height: 190px;
   margin-top: 80px;
   position: relative;
-  position: relative;
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: translateX(-10px); 
+    opacity: 0;
+    transform: translateX(-10px);
   }
   to {
-      opacity: 1;
-      transform: translateX(0); 
+    opacity: 1;
+    transform: translateX(0);
   }
+}
+
+/* Efecto brillante */
+@keyframes brillo {
+  0% {
+    text-shadow: 0 0 10px #fff, 0 0 20px #8a888a, 0 0 30px #8a888a;
+  }
+  50% {
+    text-shadow: 0 0 20px #fff, 0 0 40px #8a888a, 0 0 50px #8a888a;
+  }
+  100% {
+    text-shadow: 0 0 10px #fff, 0 0 20px #8a888a, 0 0 30px #8a888a;
+  }
+}
+
+.imagen, .Texto1 {
+  animation: fadeIn 1s ease-out;
 }
 
 .imagen:hover {
   transform: scale(1.05); 
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
+.gapo {
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-weight: bold;
+  color: white;
+}
 
-.centrar{
+.gapo:hover {
+  animation: brillo 1s infinite alternate; 
+  transform: scale(1.05); 
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.centrar {
   margin-left: 65px;
   display: flex;
   align-items: center;
   gap: 60px;
 }
 
-.Textocolor{
+.Textocolor {
   color: white;
+  margin-left: 40px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.margin {
+  margin-top: 120px;
+}
+
+.populares {
+  color: white;
+  font-weight: bold;
+  display: flex;
+  text-decoration: none;
+}
+
+.backgroundcolor{
+  background-color: rgb(43, 42, 42);
+  margin-left: 120px;
+  margin-right: 120px;
+  border-radius: 30px;
+}
+
+.informacion{
+  padding: 90px;
+  background-image: url(/public/concierto.jpg);
+  border-radius: 30px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 1000px;
+  opacity: 0.8;
+}
+
+.text-informacion{
+  color: white;
+  margin-left: 40px;
+  font-weight: bold;
+  margin-top: 230px;
+  margin-left: 100px;
+  margin-right: 100px;
+  position: relative;
+  text-align: start;
+}
+
+.info{
+  color: white;
+  margin-left: 40px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: 80px;
 }
