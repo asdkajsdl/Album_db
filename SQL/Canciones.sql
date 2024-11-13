@@ -5,7 +5,7 @@ CREATE TABLE Canciones (
     duration TIME,                           -- Duración de la canción (HH:MM:SS)
     track_number INT,                        -- Número de pista en el álbum
     release_date DATETIME,                   -- Fecha de lanzamiento de la canción
-    FOREIGN KEY (album_id) REFERENCES Álbumes(album_id)  -- Relación con la tabla Álbumes
+    FOREIGN KEY (album_id) REFERENCES Álbums(album_id)  -- Relación con la tabla Álbumes
 );
 
 
