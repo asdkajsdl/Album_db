@@ -3,7 +3,6 @@ CREATE TABLE Artistas (
     nombre VARCHAR(50) NOT NULL,
     genero VARCHAR(50),
     pais VARCHAR(50),
-    biografia TEXT
 );  
 
 INSERT INTO Artistas (nombre, genero, pais, biografia)
