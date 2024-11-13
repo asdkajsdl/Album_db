@@ -9,9 +9,9 @@ CREATE TABLE Canciones (
 );
 
 
-INSERT INTO Canciones (Album_id,Titulo, Duracion,Año_lanzamiento)
-VALUES ('Tuntakmon'),
-('Omatopopih'),
+INSERT INTO Canciones (Titulo, Duracion,Año_lanzamiento)
+VALUES ('Tuntakmon', ),
+('Omatopopih', ''),
 ('Hijo prodigo'),
 ('Vamo a bailar a tribunales'),
 ('Mas sencillo'),
