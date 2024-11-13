@@ -5,7 +5,7 @@ CREATE TABLE Canciones (
     duracion TIME,
     numero_pista INT,
     fecha_lanzamiento DATE,
-    FOREIGN KEY (id_album) REFERENCES Albumes(id_album)
+    FOREIGN KEY (id_album) REFERENCES Albums(id_album)
 );
 
 
