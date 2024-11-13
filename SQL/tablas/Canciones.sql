@@ -9,41 +9,6 @@ CREATE TABLE Canciones (
 );
 
 
-<<<<<<< HEAD
-INSERT INTO Canciones (Titulo, Duracion,Año_lanzamiento)
-VALUES ('Tuntakmon', ),
-('Omatopopih', ''),
-('Hijo prodigo'),
-('Vamo a bailar a tribunales'),
-('Mas sencillo'),
-('Dejando de fumar'),
-('La mochila del mundo'),
-('Sigo intentando'),
-('Astronautas'),
-('Anita'),
-('Casi 30'),
-('No tengo hambre tengo ansiedad'),
-('Cultura porno disney'),
-('El moutros del sofa'),
-('Dopamina'),
-('Algo nuevo'),
-('La era del Rivotril'),
-('Un dia a la vez + 135'),
-('Las vacas'),
-('Vertigo'),
-('Entre los dedos se va'),
-('No es cualquier bebida'),
-('Bonsai'),
-('Nicolas cage'),
-('El mundo siempre estuvo'),
-('Algo tiene que cambiar'),
-('El Heroe de constitucion'),
-('Paris es buen lugar para'),
-('Fin del mundo'),
-('Principio a fin'),
-('Cancion de julia'),
-('El juglar');
-=======
 INSERT INTO Canciones (Album_id,Titulo, Duracion)
 VALUES ('Tuntakmon',2:32),
 ('Omatopopih',1:00),
@@ -77,5 +42,4 @@ VALUES ('Tuntakmon',2:32),
 ('Principio a fin',),
 ('Cancion de julia',3:19),
 ('El juglar',);
->>>>>>> 5be0dbd14dbc5fb821ec03323325ac64247829b4
 
