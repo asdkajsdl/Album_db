@@ -13,6 +13,5 @@ VALUES
 (1, 'Alan Sutton y las Criaturitas de la Anciedad', 2018, 'Rock Alternativo'),
 (1, 'Hombrecito con los pies en la Tierra', 2020, 'Rock Alternativo'),
 (1, 'Algo tiene que cambiar', 2023, 'Rock Alternativo'),
-(1, 'Tomate 5', 2021, 'Rock Alternativo')
-;
+(1, 'Tomate 5', 2021, 'Rock Alternativo');
   
