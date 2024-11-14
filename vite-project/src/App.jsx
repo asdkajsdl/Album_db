@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import "./Integrantes.css";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -35,9 +34,6 @@ function App() {
             href="https://www.instagram.com/alansuttonylascriaturitas/"
           >
             Instagram
-          </a>
-          <a className="Texto-links" href="/integrantes.html">
-            Integrantes
           </a>
         </div>
       </div>

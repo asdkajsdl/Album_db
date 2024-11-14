@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canciones</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <h1>Canciones</h1>
+    <ul>
+        {% for cancion in canciones %}
+            <li>{{ cancion['titulo'] }} (Album: {{ cancion['album'] }})</li>
+        {% else %}
+            <li>No hay canciones disponibles.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/">Volver al inicio</a>
+</body>
+</html>
