@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roles</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+    <h1>Roles</h1>
+    <ul>
+        {% for rol in roles %}
+            <li>{{ rol['nombre'] }} (Descripción: {{ rol['descripcion'] }})</li>
+        {% else %}
+            <li>No hay roles disponibles.</li>
+        {% endfor %}
+    </ul>
+    <br>
+    <a href="/">Volver al inicio</a>
+</body>
+</html>
