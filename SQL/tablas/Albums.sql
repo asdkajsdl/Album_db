@@ -8,7 +8,7 @@ CREATE TABLE Albums (
 );
 
 
-INSERT INTO Albumes (id_artista, titulo, Año_lanzamiento, genero)
+INSERT INTO Albums (id_artista, titulo, Año_lanzamiento, genero)
 VALUES 
 (1, 'Alan Sutton y las Criaturitas de la Anciedad', 2018, 'Rock Alternativo'),
 (1, 'Hombrecito con los pies en la Tierra', 2020, 'Rock Alternativo'),

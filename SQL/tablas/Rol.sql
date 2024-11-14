@@ -3,7 +3,7 @@ CREATE TABLE Roles (
     nombre_rol VARCHAR(50) NOT NULL
 );
 
-INSERT INTO Miembros (rol) 
+INSERT INTO Roles (nombre_rol) 
 VALUES 
 ('Voz y guitarra'),
 ('Bajo'),
