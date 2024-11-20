@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Albums</title>
-    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-</head>
-<body>
-    <h1>Albums</h1>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='albums.css') }}"
+    />
+  </head>
+  <body>
+    <h1 class="titulo">Albums</h1>
     <ul>
-        {% for album in albums %}
-            <li>{{ album['nombre'] }} (Lanzado: {{ album['fecha_lanzamiento'] }})</li>
-        {% else %}
-            <li>No hay albums disponibles.</li>
-        {% endfor %}
+      {% for album in albums %}
+      <ul class="texts">
+        {{ album['titulo'] }} (Lanzado: {{ album['Año_lanzamiento'] }})
+      </ul>
+      {% else %}
+      <li class="texts">No hay albums disponibles.</li>
+      {% endfor %}
     </ul>
-    <br>
+    <br />
     <a href="/">Volver al inicio</a>
-</body>
+  </body>
 </html>
