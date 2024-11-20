@@ -1,9 +1,9 @@
 .Texto1 {
   text-align: center;
-  text-decoration: none; 
+  text-decoration: none;
   font-weight: bold;
   color: #ffffff;
-  font-size: 55px;
+  font-size: 50px;
   padding: 50px;
   background-color: rgb(31, 31, 31);
 }
@@ -44,12 +44,13 @@ body {
   }
 }
 
-.imagen, .Texto1 {
+.imagen,
+.Texto1 {
   animation: fadeIn 1s ease-out;
 }
 
 .imagen:hover {
-  transform: scale(1.05); 
+  transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -62,8 +63,8 @@ body {
 }
 
 .gapo:hover {
-  animation: brillo 1s infinite alternate; 
-  transform: scale(1.05); 
+  animation: brillo 1s infinite alternate;
+  transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -92,14 +93,14 @@ body {
   text-decoration: none;
 }
 
-.backgroundcolor{
+.backgroundcolor {
   background-color: rgb(43, 42, 42);
   margin-left: 120px;
   margin-right: 120px;
   border-radius: 30px;
 }
 
-.informacion{
+.informacion {
   padding: 90px;
   background-image: url(/public/concierto.jpg);
   border-radius: 30px;
@@ -109,7 +110,7 @@ body {
   opacity: 0.8;
 }
 
-.text-informacion{
+.text-informacion {
   color: white;
   margin-left: 40px;
   font-weight: bold;
@@ -120,7 +121,7 @@ body {
   text-align: start;
 }
 
-.info{
+.info {
   color: white;
   margin-left: 40px;
   font-weight: bold;
@@ -128,7 +129,7 @@ body {
   margin-top: 80px;
 }
 
-.links{
+.links {
   padding: 15px;
   background-color: #0c0c0c;
   text-align: center;
@@ -137,7 +138,7 @@ body {
   gap: 88px;
 }
 
-.Texto-links{
+.Texto-links {
   color: white;
   margin: 50px;
   text-decoration: none;
