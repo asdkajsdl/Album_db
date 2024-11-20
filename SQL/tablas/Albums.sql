@@ -7,6 +7,18 @@ CREATE TABLE Albums (
     FOREIGN KEY (id_artista) REFERENCES Artistas(id_artista)
 );
 
+--Eliminar una columna
+ALTER TABLE Albums
+DROP COLUMN genero;
+
+--Agrgar una columna
+ALTER TABLE Albums
+ADD nombre_productor VARCHAR(255);
+
+--Modificar una columna (cambiar tipo o restricción)
+ALTER TABLE Albums
+MODIFY Año_lanzamiento YEAR;
+
 
 INSERT INTO Albums (id_album, id_artista, titulo, Año_lanzamiento, genero)
 VALUES
