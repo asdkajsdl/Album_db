@@ -6,4 +6,11 @@ CREATE TABLE Pais (
 
 INSERT INTO Pais (nombre_pais)
 VALUES 
-('Argentina');
+('Argentina'),
+('España'),
+('Puerto rico')
+('Republica dominicana'),
+('chile'),
+('mexico')
+('Estados Unidos'),
+('Colombia');

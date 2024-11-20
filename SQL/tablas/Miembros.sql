@@ -13,7 +13,7 @@ UPDATE Miembros
 SET 
     biografia = 'Nueva biografía del miembro'
 WHERE 
-    id_miembro = 1; -- Reemplaza el 1 por el id del miembro que deseas actualizar
+    id_miembro = 1;
 
 
 -- Actualizar el rol de un miembro
