@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 import mysql.connector
 from mysql.connector import Error
-from flask import mariadb
+import mariadb
 
 app = Flask(__name__)
 @app.route("/albums")
@@ -77,7 +77,7 @@ def listar_roles():
         return jsonify(filas)
 
 
-#-------------------------------Delete
+#------------------------------------------------------------
 
 @app.route("/miembros/<int:id>", methods=("DELETE",))
 def borrarMiembro(id):
@@ -123,6 +123,42 @@ def borrarCancion(id):
     )
     cursor = connection.cursor()
     cursor.execute("DELETE FROM Canciones WHERE id_canciones = %s", (id,))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    
+    return { "resultado": "ok", "id": id }
+
+
+
+@app.route("/pais/<int:id>", methods=("DELETE",))
+def borrarPais(id):
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM Pais WHERE nombre_pais = %s", (id,))
+    connection.commit()
+    cursor.close()
+    connection.close()
+    
+    return { "resultado": "ok", "id": id }
+
+
+
+@app.route("/roles/<int:id>", methods=("DELETE",))
+def borrarRoles(id):
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor()
+    cursor.execute("DELETE FROM Roles WHERE nombre_rol = %s", (id,))
     connection.commit()
     cursor.close()
     connection.close()
@@ -196,8 +232,24 @@ def detalle_miembro(id):
     tabla = [dict(zip(items, row)) for row in cur.fetchall()]
     return jsonify(tabla)
 
-@app.route("/rol/<int:id>")
-def detalle_roles(id):
+
+@app.route("/roles/<int:id>")
+def detalle_Roles(id):
+    mari = mariadb.connect(
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor()
+    cur.execute("SELECT * FROM items WHERE ID= ?", (id,))
+    items = [column[0] for column in cur.description]
+    
+    tabla = [dict(zip(items, row)) for row in cur.fetchall()]
+    return jsonify(tabla)
+
+@app.route("/pais/<int:id>")
+def detalle_pais(id):
     mari = mariadb.connect(
         user = "realdata",
         password ="realdata111",
@@ -212,7 +264,8 @@ def detalle_roles(id):
     return jsonify(tabla)
 
 
-    #----------
+#--------------------------------------------------------------
+
 @app.route("/Albums/", methods=('POST',))
 def agregar_Albums():
     mari = mariadb.connect(
@@ -238,11 +291,127 @@ def agregar_Albums():
                     "id" : id})
 
 
+@app.route("/artistas/", methods=('POST',))
+def agregar_artistas():
+    mari = mariadb.connect(
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor(dictionary=True)
+    nombre = request.json["nombre"]
+    biografia = request.json["biografia"]
+    genero = request.json["genero"]
+    consulta = """
+        INSERT INTO Artistas (nombre, biografia, genero)
+        VALUES (%s, %s, %s)
+"""
+    cur.execute(consulta, (nombre, biografia, genero))
+    mari.commit()
+    id = cur.lastrowid
 
-#------------------------------
+    return jsonify({"resultado" : "ok",
+                    "id" : id})
 
-@app.route("/Albums/<int:id>", methods=('PUT',))
-def modificar_Albums(id):
+
+@app.route("/canciones/", methods=('POST',))
+def agregar_canciones():
+    mari = mariadb.connect(
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor(dictionary=True)  
+    id_album = request.json["id_album"] 
+    titulo = request.json["titulo"]
+    duracion = request.json["duracion"]
+    numero_pista = request.json["numero_pista"]
+    fecha_lanzamiento = request.json["fecha_lanzamiento"]
+    consulta = """
+        INSERT INTO Canciones (id_album, titulo, duracion, numero_pista, fecha_lanzamiento)
+        VALUES (%s, %s, %s, %s)
+"""
+    cur.execute(consulta, (id_album, titulo, duracion, numero_pista, fecha_lanzamiento, id))
+    mari.commit()
+    id = cur.lastrowid
+
+    return jsonify({"resultado" : "ok",
+                    "id" : id})
+
+
+
+@app.route("/miembro/", methods=('POST',))
+def agregar_miembro():
+    mari = mariadb.connect(
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor(dictionary=True)  
+    id_artista = request.json["id_artista"] 
+    nombre = request.json["nombre"]
+    consulta = """
+        INSERT INTO Miembro (id_artista, nombre)
+        VALUES (%s, %s, %s, %s)
+"""
+    cur.execute(consulta, (id_artista, nombre, id))
+    mari.commit()
+    id = cur.lastrowid
+
+    return jsonify({"resultado" : "ok",
+                    "id" : id})
+
+
+@app.route("/pais/", methods=('POST',))
+def agregar_pais():
+    mari = mariadb.connect(
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor(dictionary=True)  
+    nombre_pais = request.json["nombre_pais"] 
+    consulta = """
+        INSERT INTO Pais (nombre_pais, nombre)
+        VALUES (%s, %s, %s, %s)
+"""
+    cur.execute(consulta, (nombre_pais, id))
+    mari.commit()
+    id = cur.lastrowid
+
+    return jsonify({"resultado" : "ok",
+                    "id" : id})
+
+
+@app.route("/roles/", methods=('POST',))
+def agregar_roles():
+    mari = mariadb.connect( 
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor(dictionary=True)  
+    nombre_rol = request.json["nombre_rol"] 
+    consulta = """
+        INSERT INTO Roles (nombre_rol, nombre)
+        VALUES (%s, %s, %s, %s)
+"""
+    cur.execute(consulta, (nombre_rol, id))
+    mari.commit()
+    id = cur.lastrowid
+
+    return jsonify({"resultado" : "ok",
+                    "id" : id})
+
+#-----------------------------------------------------------------------
+
+@app.route("/albums/<int:id>", methods=('PUT',))
+def modificar_albums(id):
     mari = mariadb.connect(
         user = "realdata",
         password ="realdata111",
@@ -268,7 +437,7 @@ def modificar_Albums(id):
 
 
 
-@app.route("/Artistas/<int:id>", methods=('PUT',))
+@app.route("/artistas/<int:id>", methods=('PUT',))
 def modificar_Artistas(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -293,7 +462,7 @@ def modificar_Artistas(id):
                     "id" : id})
 
 
-@app.route("/Canciones/<int:id>", methods=('PUT',))
+@app.route("/canciones/<int:id>", methods=('PUT',))
 def modificar_Canciones(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -321,7 +490,7 @@ def modificar_Canciones(id):
 
 
 
-@app.route("/Miembros/<int:id>", methods=('PUT',))
+@app.route("/miembros/<int:id>", methods=('PUT',))
 def modificar_Miembros(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -346,7 +515,7 @@ def modificar_Miembros(id):
 
 
 
-@app.route("/Pais/<int:id>", methods=('PUT',))
+@app.route("/pais/<int:id>", methods=('PUT',))
 def modificar_Pais(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -361,6 +530,30 @@ def modificar_Pais(id):
         WHERE id = %s;
 """
     cur.execute(consulta, (nombre_pais, id))    
+    mari.commit()
+    cur.close()
+    mari.close()
+
+    return jsonify({"resultado" : "ok",
+                    "id" : id})
+
+
+
+@app.route("/roles/<int:id>", methods=('PUT',))
+def modificar_Roles(id):
+    mari = mariadb.connect(
+        user = "realdata",
+        password ="realdata111",
+        host ="10.9.120.5",
+        database= "realdata"
+    )
+    cur = mari.cursor(dictionary=True)
+    nombre_rol = request.json["nombre_rol"]
+    consulta = """ 
+        UPDATE Roles SET nombre_rol =%s,
+        WHERE id = %s;
+"""
+    cur.execute(consulta, (nombre_rol, id))    
     mari.commit()
     cur.close()
     mari.close()
