@@ -32,6 +32,6 @@ VALUES ('Alan Sutton Y Las Criaturitas De La Ansiedad', 'Rock Alternativo', 'Ban
 ('Feid', 'Reggaeton'),
 ('Peso Pluma', 'Corridos Tumbados y Reggaeton'),
 ('Dua lipa', 'Pop'),
-('Bruno Mars', 'Pop')
+('Bruno Mars', 'Pop'),
 ('Romeo Santos', 'Bachata');
 ;
