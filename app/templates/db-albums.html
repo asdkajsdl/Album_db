@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Álbumes</title>
+</head>
+<body>
+    <h1>Lista de Álbumes</h1>
+
+    <!-- Tabla para mostrar los álbumes -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Año de Lanzamiento</th>
+                <th>Género</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for album in albums %}
+                <tr>
+                    <td>{{ album[0] }}</td> <!-- Título del álbum -->
+                    <td>{{ album[1] }}</td> <!-- Año de lanzamiento -->
+                    <td>{{ album[2] }}</td> <!-- Género -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/albumss">Agregar un nuevo álbum</a> <!-- Enlace para agregar un nuevo álbum -->
+</body>
+</html>

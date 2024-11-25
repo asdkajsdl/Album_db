@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Álbum</title>
+</head>
+<body>
+    <h1>Agregar un Nuevo Álbum</h1>
+
+    <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Formulario para agregar un nuevo álbum -->
+    <form method="POST" action="/albumss">
+        <label for="titulo">Título: </label>
+        <input type="text" id="titulo" name="titulo" required>
+        <br>
+        <label for="Año_lanzamiento">Año de lanzamiento: </label>
+        <input type="text" id="Año_lanzamiento" name="Año_lanzamiento" required>
+        <br>
+        <label for="genero">Género: </label>
+        <input type="text" id="genero" name="genero" required>
+        <br>
+        <button type="submit">Agregar Álbum</button>
+    </form>
+
+    <br>
+    <a href="/album-db">Ver todos los álbumes</a>  <!-- Enlace para ver la lista de álbumes -->
+</body>
+</html>
