@@ -1,10 +1,31 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template, Blueprint
 import mysql.connector
 from mysql.connector import Error
 import mariadb
-
+bp = Blueprint()
 app = Flask(__name__)
-@app.route("/albums")
+
+@bp.route("/albums")
+def listar_albums():
+     # Conexión con los parámetros necesarios
+        connection = mysql.connector.connect(
+            host='10.9.120.5', 
+            database='realdata',
+            user='realdata',
+            password='realdata111'
+        )
+        cursor = connection.cursor(dictionary=True)
+            # Ejecutar la consulta SQL
+        cursor.execute("SELECT * FROM Albums")
+            # Obtener nombres de las columnas
+        filas = cursor.fetchall()
+            # Formatear los resultados como una lista de diccionarios
+        return render_template("album.html", fila = filas)
+
+
+
+#------------------------------------------------------------
+@app.route("/api/albums")
 def listar_albums():
      # Conexión con los parámetros necesarios
         connection = mysql.connector.connect(
@@ -22,7 +43,7 @@ def listar_albums():
         return jsonify(filas)
 
 
-@app.route("/artistas")
+@app.route("/api/artistas")
 def listar_artistas():
         connection = mysql.connector.connect(
             host='10.9.120.5', 
@@ -36,7 +57,7 @@ def listar_artistas():
         return jsonify(filas)
 
 
-@app.route("/canciones")
+@app.route("/api/canciones")
 def listar_canciones():
         connection = mysql.connector.connect(
             host='10.9.120.5', 
@@ -50,7 +71,7 @@ def listar_canciones():
         return jsonify(filas)
 
 
-@app.route("/miembros")
+@app.route("/api/miembros")
 def listar_miembros():
         connection = mysql.connector.connect(
             host='10.9.120.5', 
@@ -63,7 +84,7 @@ def listar_miembros():
         filas = cursor.fetchall()
         return jsonify(filas)
 
-@app.route("/rol")
+@app.route("/api/rol")
 def listar_roles():
         connection = mysql.connector.connect(
             host='10.9.120.5', 
@@ -79,7 +100,7 @@ def listar_roles():
 
 #------------------------------------------------------------
 
-@app.route("/miembros/<int:id>", methods=("DELETE",))
+@app.route("/api/miembros/<int:id>", methods=("DELETE",))
 def borrarMiembro(id):
     connection = mysql.connector.connect(
         host='10.9.120.5', 
@@ -96,7 +117,7 @@ def borrarMiembro(id):
     return { "resultado": "ok", "id": id }
 
 
-@app.route("/artistas/<int:id>", methods=("DELETE",))
+@app.route("/api/artistas/<int:id>", methods=("DELETE",))
 def borrarArtista(id):
     connection = mysql.connector.connect(
         host='10.9.120.5', 
@@ -113,7 +134,7 @@ def borrarArtista(id):
     return { "resultado": "ok", "id": id }
 
 
-@app.route("/canciones/<int:id>", methods=("DELETE",))
+@app.route("/api/canciones/<int:id>", methods=("DELETE",))
 def borrarCancion(id):
     connection = mysql.connector.connect(
         host='10.9.120.5', 
@@ -131,7 +152,7 @@ def borrarCancion(id):
 
 
 
-@app.route("/pais/<int:id>", methods=("DELETE",))
+@app.route("/api/pais/<int:id>", methods=("DELETE",))
 def borrarPais(id):
     connection = mysql.connector.connect(
         host='10.9.120.5', 
@@ -149,7 +170,7 @@ def borrarPais(id):
 
 
 
-@app.route("/roles/<int:id>", methods=("DELETE",))
+@app.route("/api/roles/<int:id>", methods=("DELETE",))
 def borrarRoles(id):
     connection = mysql.connector.connect(
         host='10.9.120.5', 
@@ -169,7 +190,7 @@ def borrarRoles(id):
 #-----------------------------------------------------
 
 
-@app.route("/albums/<int:id>")
+@app.route("/api/albums/<int:id>")
 def detalle_album(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -185,7 +206,7 @@ def detalle_album(id):
     return jsonify(tabla)
 
 
-@app.route("/artistas/<int:id>")
+@app.route("/api/artistas/<int:id>")
 def detalle_artista(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -201,7 +222,7 @@ def detalle_artista(id):
     return jsonify(tabla)
 
 
-@app.route("/canciones/<int:id>")
+@app.route("/api/canciones/<int:id>")
 def detalle_cancion(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -217,7 +238,7 @@ def detalle_cancion(id):
     return jsonify(tabla)
 
 
-@app.route("/miembros/<int:id>")
+@app.route("/api/miembros/<int:id>")
 def detalle_miembro(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -233,7 +254,7 @@ def detalle_miembro(id):
     return jsonify(tabla)
 
 
-@app.route("/roles/<int:id>")
+@app.route("/api/roles/<int:id>")
 def detalle_Roles(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -248,7 +269,7 @@ def detalle_Roles(id):
     tabla = [dict(zip(items, row)) for row in cur.fetchall()]
     return jsonify(tabla)
 
-@app.route("/pais/<int:id>")
+@app.route("/api/pais/<int:id>")
 def detalle_pais(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -266,7 +287,7 @@ def detalle_pais(id):
 
 #--------------------------------------------------------------
 
-@app.route("/Albums/", methods=('POST',))
+@app.route("/api/Albums/", methods=('POST',))
 def agregar_Albums():
     mari = mariadb.connect(
         user = "realdata",
@@ -291,7 +312,7 @@ def agregar_Albums():
                     "id" : id})
 
 
-@app.route("/artistas/", methods=('POST',))
+@app.route("/api/artistas/", methods=('POST',))
 def agregar_artistas():
     mari = mariadb.connect(
         user = "realdata",
@@ -315,7 +336,7 @@ def agregar_artistas():
                     "id" : id})
 
 
-@app.route("/canciones/", methods=('POST',))
+@app.route("/api/canciones/", methods=('POST',))
 def agregar_canciones():
     mari = mariadb.connect(
         user = "realdata",
@@ -342,7 +363,7 @@ def agregar_canciones():
 
 
 
-@app.route("/miembro/", methods=('POST',))
+@app.route("/api/miembro/", methods=('POST',))
 def agregar_miembro():
     mari = mariadb.connect(
         user = "realdata",
@@ -365,7 +386,7 @@ def agregar_miembro():
                     "id" : id})
 
 
-@app.route("/pais/", methods=('POST',))
+@app.route("/api/pais/", methods=('POST',))
 def agregar_pais():
     mari = mariadb.connect(
         user = "realdata",
@@ -387,7 +408,7 @@ def agregar_pais():
                     "id" : id})
 
 
-@app.route("/roles/", methods=('POST',))
+@app.route("/api/roles/", methods=('POST',))
 def agregar_roles():
     mari = mariadb.connect( 
         user = "realdata",
@@ -410,7 +431,7 @@ def agregar_roles():
 
 #-----------------------------------------------------------------------
 
-@app.route("/albums/<int:id>", methods=('PUT',))
+@app.route("/api/albums/<int:id>", methods=('PUT',))
 def modificar_albums(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -437,7 +458,7 @@ def modificar_albums(id):
 
 
 
-@app.route("/artistas/<int:id>", methods=('PUT',))
+@app.route("/api/artistas/<int:id>", methods=('PUT',))
 def modificar_Artistas(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -462,7 +483,7 @@ def modificar_Artistas(id):
                     "id" : id})
 
 
-@app.route("/canciones/<int:id>", methods=('PUT',))
+@app.route("/api/canciones/<int:id>", methods=('PUT',))
 def modificar_Canciones(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -490,7 +511,7 @@ def modificar_Canciones(id):
 
 
 
-@app.route("/miembros/<int:id>", methods=('PUT',))
+@app.route("/api/miembros/<int:id>", methods=('PUT',))
 def modificar_Miembros(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -515,7 +536,7 @@ def modificar_Miembros(id):
 
 
 
-@app.route("/pais/<int:id>", methods=('PUT',))
+@app.route("/api/pais/<int:id>", methods=('PUT',))
 def modificar_Pais(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -539,7 +560,7 @@ def modificar_Pais(id):
 
 
 
-@app.route("/roles/<int:id>", methods=('PUT',))
+@app.route("/api/roles/<int:id>", methods=('PUT',))
 def modificar_Roles(id):
     mari = mariadb.connect(
         user = "realdata",
@@ -560,3 +581,144 @@ def modificar_Roles(id):
 
     return jsonify({"resultado" : "ok",
                     "id" : id})
+
+#-------------------------------------------
+#----------NUEVAS SENTENCIAS----------------
+@app.route("/api/albums")
+def listar_albums():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Albums")
+    albums = cursor.fetchall()
+    return render_template("albums.html", albums=albums)
+
+@app.route("/api/artistas")
+def listar_artistas():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Artistas")
+    artistas = cursor.fetchall()
+    return render_template("artistas.html", artistas=artistas)
+
+@app.route("/api/canciones")
+def listar_canciones():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Canciones")
+    canciones = cursor.fetchall()
+    return render_template("canciones.html", canciones=canciones)
+
+@app.route("/api/miembros")
+def listar_miembros():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Miembros")
+    miembros = cursor.fetchall()
+    return render_template("miembros.html", miembros=miembros)
+
+@app.route("/api/roles")
+def listar_roles():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Roles")
+    roles = cursor.fetchall()
+    return render_template("roles.html", roles=roles)
+
+#---------------------------------------------
+
+@app.route("/api/albums/<int:id>")
+def detalle_album(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Albums WHERE id = ?", (id,))
+    album = cur.fetchone()
+    return render_template("album.html", album=album)
+
+@app.route("/api/artistas/<int:id>")
+def detalle_artista(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Artistas WHERE id_Artista = ?", (id,))
+    artista = cur.fetchone()
+    return render_template("artista.html", artista=artista)
+
+@app.route("/api/canciones/<int:id>")
+def detalle_cancion(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Canciones WHERE id_canciones = ?", (id,))
+    cancion = cur.fetchone()
+    return render_template("cancion.html", cancion=cancion)
+
+@app.route("/api/miembros/<int:id>")
+def detalle_miembro(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Miembros WHERE id_miembro = ?", (id,))
+    miembro = cur.fetchone()
+    return render_template("miembro.html", miembro=miembro)
+
+@app.route("/api/roles/<int:id>")
+def detalle_rol(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Roles WHERE id_rol = ?", (id,))
+    rol = cur.fetchone()
+    return render_template("rol.html", rol=rol)
+
+#----------------------------------------------
+
+# Asegúrate de que los métodos POST y PUT también rendericen plantillas según sea necesario.
+
+if __name__ == "__main__":
+    app.run(debug=True)
