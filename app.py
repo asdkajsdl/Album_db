@@ -1,26 +1,147 @@
-from flask import Flask, jsonify, request, render_template, Blueprint
+from flask import Flask, jsonify, request, render_template
 import mysql.connector
-from mysql.connector import Error
 import mariadb
-bp = Blueprint()
-app = Flask(__name__)
 
-@bp.route("/albums")
-def listar_albums():
-     # Conexión con los parámetros necesarios
-        connection = mysql.connector.connect(
-            host='10.9.120.5', 
-            database='realdata',
-            user='realdata',
-            password='realdata111'
-        )
-        cursor = connection.cursor(dictionary=True)
-            # Ejecutar la consulta SQL
-        cursor.execute("SELECT * FROM Albums")
-            # Obtener nombres de las columnas
-        filas = cursor.fetchall()
-            # Formatear los resultados como una lista de diccionarios
-        return render_template("album.html", fila = filas)
+app = Flask(__name__)
+#NO LLEVAN /API
+#SE ESCRIBEN POR EJ: /albums
+#NOMBRE DEF NO REPETIR
+#------------------------------------------------------------------------------
+#-------------------------------LO NUEVO---------------------------------------
+#------------------------------------------------------------------------------
+#-------------------------------------------
+#----------NUEVAS SENTENCIAS----------------
+@app.route("/albums")
+def mostrar_albums():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Albums")
+    albums = cursor.fetchall()
+    return render_template("album.html", fila=albums)
+
+@app.route("/artistas")
+def mostrar_artistas():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Artistas")
+    artistas = cursor.fetchall()
+    return render_template("artistas.html", artistas=artistas)
+
+@app.route("/canciones")
+def mostrar_canciones():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Canciones")
+    canciones = cursor.fetchall()
+    return render_template("canciones.html", canciones=canciones)
+
+@app.route("/miembros")
+def mostrar_miembros():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Miembros")
+    miembros = cursor.fetchall()
+    return render_template("miembros.html", miembros=miembros)
+
+@app.route("/roles")
+def mostrar_roles():
+    connection = mysql.connector.connect(
+        host='10.9.120.5', 
+        database='realdata',
+        user='realdata',
+        password='realdata111'
+    )
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM Roles")
+    roles = cursor.fetchall()
+    return render_template("roles.html", roles=roles)
+
+#---------------------------------------------
+
+@app.route("/albums/<int:id>")
+def det_album(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Albums WHERE id = ?", (id,))
+    album = cur.fetchone()
+    return render_template("album.html", album=album)
+
+@app.route("/artistas/<int:id>")
+def det_artista(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Artistas WHERE id_Artista = ?", (id,))
+    artista = cur.fetchone()
+    return render_template("artista.html", artista=artista)
+
+@app.route("/canciones/<int:id>")
+def det_cancion(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Canciones WHERE id_canciones = ?", (id,))
+    cancion = cur.fetchone()
+    return render_template("cancion.html", cancion=cancion)
+
+@app.route("/miembros/<int:id>")
+def det_miembro(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Miembros WHERE id_miembro = ?", (id,))
+    miembro = cur.fetchone()
+    return render_template("miembro.html", miembro=miembro)
+
+@app.route("/roles/<int:id>")
+def det_rol(id):
+    connection = mariadb.connect(
+        user="realdata",
+        password="realdata111",
+        host="10.9.120.5",
+        database="realdata"
+    )
+    cur = connection.cursor(dictionary=True)
+    cur.execute("SELECT * FROM Roles WHERE id_rol = ?", (id,))
+    rol = cur.fetchone()
+    return render_template("rol.html", rol=rol)
 
 
 
@@ -582,139 +703,6 @@ def modificar_Roles(id):
     return jsonify({"resultado" : "ok",
                     "id" : id})
 
-#-------------------------------------------
-#----------NUEVAS SENTENCIAS----------------
-@app.route("/api/albums")
-def listar_albums():
-    connection = mysql.connector.connect(
-        host='10.9.120.5', 
-        database='realdata',
-        user='realdata',
-        password='realdata111'
-    )
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM Albums")
-    albums = cursor.fetchall()
-    return render_template("albums.html", albums=albums)
-
-@app.route("/api/artistas")
-def listar_artistas():
-    connection = mysql.connector.connect(
-        host='10.9.120.5', 
-        database='realdata',
-        user='realdata',
-        password='realdata111'
-    )
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM Artistas")
-    artistas = cursor.fetchall()
-    return render_template("artistas.html", artistas=artistas)
-
-@app.route("/api/canciones")
-def listar_canciones():
-    connection = mysql.connector.connect(
-        host='10.9.120.5', 
-        database='realdata',
-        user='realdata',
-        password='realdata111'
-    )
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM Canciones")
-    canciones = cursor.fetchall()
-    return render_template("canciones.html", canciones=canciones)
-
-@app.route("/api/miembros")
-def listar_miembros():
-    connection = mysql.connector.connect(
-        host='10.9.120.5', 
-        database='realdata',
-        user='realdata',
-        password='realdata111'
-    )
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM Miembros")
-    miembros = cursor.fetchall()
-    return render_template("miembros.html", miembros=miembros)
-
-@app.route("/api/roles")
-def listar_roles():
-    connection = mysql.connector.connect(
-        host='10.9.120.5', 
-        database='realdata',
-        user='realdata',
-        password='realdata111'
-    )
-    cursor = connection.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM Roles")
-    roles = cursor.fetchall()
-    return render_template("roles.html", roles=roles)
-
-#---------------------------------------------
-
-@app.route("/api/albums/<int:id>")
-def detalle_album(id):
-    connection = mariadb.connect(
-        user="realdata",
-        password="realdata111",
-        host="10.9.120.5",
-        database="realdata"
-    )
-    cur = connection.cursor(dictionary=True)
-    cur.execute("SELECT * FROM Albums WHERE id = ?", (id,))
-    album = cur.fetchone()
-    return render_template("album.html", album=album)
-
-@app.route("/api/artistas/<int:id>")
-def detalle_artista(id):
-    connection = mariadb.connect(
-        user="realdata",
-        password="realdata111",
-        host="10.9.120.5",
-        database="realdata"
-    )
-    cur = connection.cursor(dictionary=True)
-    cur.execute("SELECT * FROM Artistas WHERE id_Artista = ?", (id,))
-    artista = cur.fetchone()
-    return render_template("artista.html", artista=artista)
-
-@app.route("/api/canciones/<int:id>")
-def detalle_cancion(id):
-    connection = mariadb.connect(
-        user="realdata",
-        password="realdata111",
-        host="10.9.120.5",
-        database="realdata"
-    )
-    cur = connection.cursor(dictionary=True)
-    cur.execute("SELECT * FROM Canciones WHERE id_canciones = ?", (id,))
-    cancion = cur.fetchone()
-    return render_template("cancion.html", cancion=cancion)
-
-@app.route("/api/miembros/<int:id>")
-def detalle_miembro(id):
-    connection = mariadb.connect(
-        user="realdata",
-        password="realdata111",
-        host="10.9.120.5",
-        database="realdata"
-    )
-    cur = connection.cursor(dictionary=True)
-    cur.execute("SELECT * FROM Miembros WHERE id_miembro = ?", (id,))
-    miembro = cur.fetchone()
-    return render_template("miembro.html", miembro=miembro)
-
-@app.route("/api/roles/<int:id>")
-def detalle_rol(id):
-    connection = mariadb.connect(
-        user="realdata",
-        password="realdata111",
-        host="10.9.120.5",
-        database="realdata"
-    )
-    cur = connection.cursor(dictionary=True)
-    cur.execute("SELECT * FROM Roles WHERE id_rol = ?", (id,))
-    rol = cur.fetchone()
-    return render_template("rol.html", rol=rol)
 
 #----------------------------------------------
 

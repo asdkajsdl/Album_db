@@ -1,0 +1,24 @@
+{% block title %}Lista de canciones{% endblock %}
+
+{% block header %}
+<h1>canciones</h1>
+{% endblock %}
+
+{% block content %}
+{% for canciones in fila %}
+<article class="canciones">
+    <header>
+        <div>
+            <h2>{{ canciones['titulo'] }}</h2>
+        </div>
+    </header>
+</article>
+{% if not loop.last %}
+<hr>
+{% endif %}
+
+{% endfor %}
+<footer>
+    <p>© 2024 Mi Aplicación</p>
+</footer>
+{% endblock %}
